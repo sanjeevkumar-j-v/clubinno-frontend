@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-function App() {
-  return (
-    <div className="App">
-      <h1>Welcome to Club Innovative</h1>
-    </div>
-  );
+import { fetchPosts } from '../actions/posts';
+
+class App extends Component {
+  componentDidMount() {
+    this.props.dispatch(fetchPosts());
+  }
+  render() {
+    console.log('PROPS: ', this.props);
+    const posts = this.props.posts;
+    return (
+      <div>
+        {posts.map((data, index) => (
+          <p>{data.content}</p>
+        ))}
+        <h1>Welcome to club innovative</h1>
+      </div>
+    );
+  }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    posts: state.posts,
+  };
+}
+
+export default connect(mapStateToProps)(App);
