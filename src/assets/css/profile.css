@@ -1,0 +1,171 @@
+@import url("https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300;700&family=Source+Sans+Pro&display=swap");
+:root {
+  --tint: #DD3333;
+  /* Color */
+  --innerOpacity: 0.2;
+  /* Brightness */
+  --outerOpacity: 0.7;
+  /* Vignette Amount */
+  --animationSpeed: 0.3s;
+  /* Base animation timing */
+  --cardRound: 30px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #DD3333;
+  background-image: radial-gradient(circle at 50%, rgba(0, 0, 0, var(--innerOpacity)), rgba(0, 0, 0, var(--outerOpacity)));
+}
+
+.card {
+  width: 250px;
+  height: 350px;
+  background-color: white;
+  border-top-left-radius: calc(var(--cardRound) + 3px);
+  border-top-right-radius: calc(var(--cardRound) + 3px);
+  border-bottom-left-radius: var(--cardRound);
+  border-bottom-right-radius: var(--cardRound);
+  position: relative;
+  transition: transform var(--animationSpeed) ease;
+  transform-style: preserve-3d;
+}
+.card::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: var(--cardRound);
+  transition: box-shadow var(--animationSpeed) ease;
+  box-shadow: 0 0 45px rgba(125, 21, 21, 0.2), 0 0 39px rgba(125, 21, 21, 0.3), 0 0 18px rgba(0, 0, 0, 0.5);
+}
+.card:hover, .card.hovered {
+  transform: scale(1.2);
+}
+.card:hover::after, .card.hovered::after {
+  box-shadow: 0 0 39px rgba(125, 21, 21, 0.5), 0 0 18px rgba(125, 21, 21, 0.6), 0 0 4px #7d1515, inset 12px 12px 12px rgba(255, 255, 255, 0.6), inset -12px -12px 8px rgba(125, 21, 21, 0.3);
+}
+.card:hover header::after, .card.hovered header::after {
+  opacity: 0.3;
+}
+.card:hover .profile-image, .card.hovered .profile-image {
+  transform: translateZ(40px) translateY(50%) scale(1.1);
+  box-shadow: 0 0 5px rgba(125, 21, 21, 0.5);
+}
+.card:hover .profile-image::after, .card.hovered .profile-image::after {
+  opacity: 0.6;
+  box-shadow: inset 0 0 10px #dd3333, inset 12px 12px 12px white, inset -12px -12px 8px #7d1515;
+}
+.card:hover .profile-image img, .card.hovered .profile-image img {
+  filter: none;
+}
+.card:hover .card__body h1, .card.hovered .card__body h1 {
+  text-shadow: 0 0 5px rgba(125, 21, 21, 0.5);
+}
+.card header {
+  width: 100%;
+  height: 100px;
+  background-color: #DD3333;
+  border-top-left-radius: var(--cardRound);
+  border-top-right-radius: var(--cardRound);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+}
+.card header::after {
+  content: "";
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transition: opacity var(--animationSpeed) ease;
+  border-top-left-radius: var(--cardRound);
+  border-top-right-radius: var(--cardRound);
+  background: linear-gradient(292deg, #dd3333 0%, #dd3333 10%, rgba(255, 255, 255, 0.5) 11%, rgba(255, 255, 255, 0.5) 49%, #dd3333 50%, #dd3333 55%, rgba(255, 255, 255, 0.5) 56%, rgba(255, 255, 255, 0.5) 66%, #dd3333 67%, #dd3333 69%, rgba(255, 255, 255, 0.5) 70%);
+  box-shadow: inset 2px 1px 0 0 #DD3333;
+}
+.card header .profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #FFFFFF;
+  transform: translateZ(40px) translateY(50%);
+  transition: transform var(--animationSpeed) ease;
+  z-index: 100;
+}
+.card header .profile-image::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  background: linear-gradient(292deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 10%, rgba(255, 255, 255, 0.4) 11%, rgba(255, 255, 255, 0.4) 49%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.5) 55%, rgba(255, 255, 255, 0.4) 56%, rgba(255, 255, 255, 0.4) 66%, rgba(255, 255, 255, 0.5) 67%, rgba(255, 255, 255, 0.5) 69%, rgba(255, 255, 255, 0.4) 70%);
+  box-shadow: inset -2px -1px 0 0 #DD3333;
+  transition: opacity var(--animationSpeed) ease;
+}
+.card header .profile-image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: filter var(--animationSpeed) ease;
+  filter: grayscale(1);
+}
+.card .card__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 50px;
+}
+.card .card__body h1 {
+  font-family: "Sansita Swashed", cursive;
+  font-size: 22px;
+  font-weight: 700;
+  transform: translateZ(20px);
+  color: #DD3333;
+}
+.card .card__body h2 {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: 700;
+  transform: translateZ(20px);
+}
+.card .card__body .social {
+  padding-top: 40px;
+  font-size: 18px;
+}
+.card .card__body .social a {
+  text-decoration: none;
+  margin: 0 10px;
+  position: relative;
+  display: inline-block;
+  padding: 5px;
+  color: rgba(194, 172, 172, 0.8);
+  transition: transform var(--animationSpeed) ease, color var(--animationSpeed) ease;
+}
+.card .card__body .social a:hover {
+  transform: scale(1.2) translateZ(50px);
+  color: #DD3333;
+}
