@@ -2,6 +2,24 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchPosts } from '../actions/posts';
+import Home from './Home';
+import Navbar from './Navbar';
+import Login from './Login';
+import Blog from './Blog';
+import Footer from './Footer';
+import Header from './Header';
+import Contact from './Contact';
+
+import '../assets/css/bootstrap.min.css';
+import '../assets/css/home.css';
+import '../assets/css/main.css';
+import '../assets/css/responsive.css';
+import '../assets/fonts/line-icons.css'
+import '../assets/plugins/morris/morris.css';
+import '../assets/assets/css/animate.css';
+import '../assets/assets/css/bootstrap.min.css';
+import '../assets/assets/css/default.css';
+import '../assets/assets/css/style.css';
 
 class App extends Component {
   componentDidMount() {
@@ -11,11 +29,18 @@ class App extends Component {
     console.log('PROPS: ', this.props);
     const posts = this.props.posts;
     return (
-      <div>
-        {posts.map((data, index) => (
-          <p>{data.content}</p>
-        ))}
-        <h1>Welcome to club innovative</h1>
+      <div class="app header-default side-nav-dark">
+        <div class="layout">
+          <Header />
+          <Navbar />
+          <div class="page-container">
+            <Home />
+            {/* <Login />
+            <Blog />
+            <Contact />
+            <Footer /> */}
+          </div>
+        </div>
       </div>
     );
   }
